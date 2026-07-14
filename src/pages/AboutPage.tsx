@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Award, Compass, Eye, HeartHandshake, MapPin, Sparkles } from 'lucide-react'
+import { Award, Compass, Eye, HeartHandshake, Sparkles } from 'lucide-react'
 import FinalCTASection from '../components/sections/FinalCTASection'
 import SectionReveal, { StaggerContainer, StaggerItem } from '../components/ui/SectionReveal'
 import SectionTitle from '../components/ui/SectionTitle'
@@ -102,7 +102,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionTitle eyebrow="Culture" title="How we work." description="Remote-first, async-friendly, and deeply intentional about craft." align="center" />
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            {['Future-forward design', 'Human-centered interaction', 'Operational elegance'].map((item, i) => (
+            {['Future-forward design', 'Human-centered interaction', 'Operational elegance'].map((item, ) => (
               <motion.div key={item} className="rounded-2xl border border-white/10 bg-dark-charcoal p-6 text-center" whileHover={{ y: -4 }}>
                 <Sparkles className="mx-auto mb-3 text-cyan-300" size={24} />
                 <p className="text-white">{item}</p>
