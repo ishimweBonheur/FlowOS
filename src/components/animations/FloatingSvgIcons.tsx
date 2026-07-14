@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 
 type IconKind = 'plus' | 'minus' | 'percent' | 'grid' | 'bolt' | 'node' | 'chart' | 'circle'
@@ -10,7 +9,6 @@ interface FloatingIcon {
   top: string
   size: number
   opacity: number
-  blur: number
   duration: number
   delay: number
   rotate: number
@@ -18,23 +16,22 @@ interface FloatingIcon {
 
 function createIcons(): FloatingIcon[] {
   const kinds: IconKind[] = ['plus', 'minus', 'percent', 'grid', 'bolt', 'node', 'chart', 'circle']
-  return Array.from({ length: 18 }, (_, index) => ({
+  return Array.from({ length: 5 }, (_, index) => ({
     id: index,
     kind: kinds[index % kinds.length]!,
-    left: `${4 + Math.random() * 92}%`,
-    top: `${4 + Math.random() * 92}%`,
-    size: 18 + Math.random() * 36,
-    opacity: 0.06 + Math.random() * 0.14,
-    blur: Math.random() > 0.55 ? 1 + Math.random() * 2 : 0,
-    duration: 14 + Math.random() * 18,
-    delay: Math.random() * 6,
-    rotate: -25 + Math.random() * 50,
+    left: `${8 + Math.random() * 84}%`,
+    top: `${8 + Math.random() * 84}%`,
+    size: 20 + Math.random() * 28,
+    opacity: 0.06 + Math.random() * 0.1,
+    duration: 16 + Math.random() * 12,
+    delay: Math.random() * 4,
+    rotate: -20 + Math.random() * 40,
   }))
 }
 
 function IconShape({ kind, size }: { kind: IconKind; size: number }) {
-  const stroke = 'rgba(148, 163, 184, 0.9)'
-  const fill = 'rgba(148, 163, 184, 0.15)'
+  const stroke = 'rgba(148, 163, 184, 0.7)'
+  const fill = 'rgba(148, 163, 184, 0.12)'
 
   switch (kind) {
     case 'plus':
@@ -103,31 +100,19 @@ export default function FloatingSvgIcons() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {icons.map((icon) => (
-        <motion.div
+        <div
           key={icon.id}
           className="absolute"
           style={{
             left: icon.left,
             top: icon.top,
             opacity: icon.opacity,
-            filter: icon.blur ? `blur(${icon.blur}px)` : undefined,
-            rotate: icon.rotate,
-          }}
-          animate={{
-            y: [0, -18, 6, -12, 0],
-            x: [0, 8, -6, 4, 0],
-            rotate: [icon.rotate, icon.rotate + 8, icon.rotate - 6, icon.rotate + 4, icon.rotate],
-            scale: [1, 1.06, 0.96, 1.03, 1],
-          }}
-          transition={{
-            duration: icon.duration,
-            delay: icon.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
+            ['--icon-rotate' as string]: `${icon.rotate}deg`,
+            animation: `icon-float ${icon.duration}s ease-in-out ${icon.delay}s infinite`,
           }}
         >
           <IconShape kind={icon.kind} size={icon.size} />
-        </motion.div>
+        </div>
       ))}
     </div>
   )

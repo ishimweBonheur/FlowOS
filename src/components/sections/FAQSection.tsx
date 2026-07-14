@@ -30,7 +30,7 @@ export default function FAQSection() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-      <div className="rounded-[2.5rem] border border-white/10 bg-slate-950/60 p-8 lg:p-12">
+      <div className="rounded-[2.5rem] border border-white/10 bg-almost-black p-8 lg:p-12">
         <div className="max-w-2xl">
           <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">FAQ</p>
           <h2 className="mt-4 font-['Outfit'] text-3xl font-semibold text-white sm:text-4xl">Questions teams ask before they launch with FlowOS.</h2>
@@ -39,7 +39,7 @@ export default function FAQSection() {
           {items.map((item, index) => {
             const expanded = openIndex === index
             return (
-              <div key={item.question} className="rounded-2xl border border-white/10 bg-white/5">
+              <div key={item.question} className="rounded-2xl border border-white/10 bg-dark-charcoal">
                 <button
                   className="flex w-full items-center justify-between px-5 py-5 text-left"
                   onClick={() => setOpenIndex(expanded ? null : index)}

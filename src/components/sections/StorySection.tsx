@@ -10,7 +10,7 @@ const timeline = [
 export default function StorySection() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-      <div className="rounded-[2.5rem] border border-white/10 bg-slate-950/60 p-8 lg:p-12">
+      <div className="rounded-[2.5rem] border border-white/10 bg-almost-black p-8 lg:p-12">
         <div className="max-w-2xl">
           <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">Our journey</p>
           <h2 className="mt-4 font-['Outfit'] text-3xl font-semibold text-white sm:text-4xl">A story shaped by clarity, craft, and momentum.</h2>

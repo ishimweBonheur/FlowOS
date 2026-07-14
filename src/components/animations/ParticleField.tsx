@@ -10,13 +10,13 @@ interface Particle {
 }
 
 function createParticles(): Particle[] {
-  return Array.from({ length: 22 }, (_, index) => ({
+  return Array.from({ length: 6 }, (_, index) => ({
     id: index,
     left: `${Math.random() * 100}%`,
     top: `${Math.random() * 100}%`,
-    size: 2 + Math.random() * 4,
-    duration: 8 + Math.random() * 10,
-    delay: Math.random() * 4,
+    size: 2 + Math.random() * 3,
+    duration: 10 + Math.random() * 8,
+    delay: Math.random() * 3,
   }))
 }
 
@@ -28,14 +28,14 @@ export default function ParticleField() {
       {particles.map((particle) => (
         <span
           key={particle.id}
-          className="absolute rounded-full bg-white/70"
+          className="absolute rounded-full bg-white/50"
           style={{
             left: particle.left,
             top: particle.top,
             width: particle.size,
             height: particle.size,
             animation: `float ${particle.duration}s ease-in-out ${particle.delay}s infinite`,
-            opacity: 0.4,
+            opacity: 0.35,
           }}
         />
       ))}

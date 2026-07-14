@@ -51,7 +51,7 @@ export default function PricingPage() {
                 </li>
               ))}
             </ul>
-            <button className={`mt-8 w-full rounded-full px-5 py-3 font-medium ${plan.highlighted ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950' : 'border border-white/10 bg-white/5 text-white'}`}>
+            <button className={`mt-8 w-full rounded-full px-5 py-3 font-medium ${plan.highlighted ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950' : 'border border-white/10 bg-soft-dark-gray text-white'}`}>
               Choose plan
             </button>
           </GlassCard>

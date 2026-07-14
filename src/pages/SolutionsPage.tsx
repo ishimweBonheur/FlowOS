@@ -12,7 +12,7 @@ const solutions = [
 export default function SolutionsPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-      <section className="rounded-[2.5rem] border border-white/10 bg-slate-950/60 p-10 lg:p-16">
+      <section className="rounded-[2.5rem] border border-white/10 bg-almost-black p-10 lg:p-16">
         <SectionTitle eyebrow="Solutions" title="A tailored operating layer for every kind of team." description="Whether you are building a startup, a studio, or a global enterprise, FlowOS adapts to your rhythm." />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {solutions.map((solution) => {

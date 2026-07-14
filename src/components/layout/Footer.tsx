@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/70">
+    <footer className="border-t border-white/10 bg-almost-black">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.3fr_0.7fr_0.7fr_0.7fr] lg:px-8">
         <div>
           <div className="mb-4 flex items-center gap-2 text-cyan-300">
@@ -35,7 +35,7 @@ export default function Footer() {
 
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-200">Stay in flow</h3>
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
+          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-soft-dark-gray px-4 py-3 text-sm text-slate-300">
             <span>Join the newsletter</span>
             <ArrowRight size={16} />
           </div>

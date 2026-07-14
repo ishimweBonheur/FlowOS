@@ -24,7 +24,7 @@ export default function SolutionsSection() {
                 </div>
                 <h3 className="text-xl font-semibold text-white">{solution.title}</h3>
                 <p className="mt-3 text-slate-400">{solution.description}</p>
-                <button className="mt-6 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">Explore</button>
+                <button className="mt-6 rounded-full border border-white/10 bg-soft-dark-gray px-4 py-2 text-sm text-slate-300">Explore</button>
               </GlassPanel>
             </motion.div>
           )

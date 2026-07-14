@@ -42,7 +42,7 @@ export default function HomePage() {
     <div className="overflow-hidden">
       <HeroSection />
 
-      <section className="border-y border-white/10 bg-slate-950/50 py-6">
+      <section className="border-y border-white/10 bg-almost-black py-6">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-6 px-6 text-slate-400 lg:px-8">
           <p className="text-sm uppercase tracking-[0.35em] text-slate-500">Trusted by ambitious teams</p>
           <div className="flex flex-wrap items-center justify-center gap-8">
@@ -61,7 +61,7 @@ export default function HomePage() {
             return (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ delay: index * 0.06 }}>
                 <GlassCard className={`h-full p-6 bg-gradient-to-br ${feature.accent}`} hover>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-950/70 text-cyan-300">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-almost-black text-cyan-300">
                     <Icon size={20} />
                   </div>
                   <h3 className="text-xl font-semibold text-white">{feature.title}</h3>

@@ -1,6 +1,5 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { PlayCircle } from 'lucide-react'
-import { useState } from 'react'
 import GlowButton from '../ui/GlowButton'
 import GlassPanel from '../ui/GlassPanel'
 
@@ -11,25 +10,20 @@ const cards = [
 ]
 
 export default function HeroSection() {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  useSpring(x, { stiffness: 120, damping: 16 })
-  useSpring(y, { stiffness: 120, damping: 16 })
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 16 })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 120, damping: 16 })
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
-    const px = (event.clientX - rect.left) / rect.width - 0.5
-    const py = (event.clientY - rect.top) / rect.height - 0.5
-    x.set(px * 8)
-    y.set(py * 8)
-    setTilt({ x: py * 6, y: px * 6 })
+    mouseX.set((event.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((event.clientY - rect.top) / rect.height - 0.5)
   }
 
   const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-    setTilt({ x: 0, y: 0 })
+    mouseX.set(0)
+    mouseY.set(0)
   }
 
   return (
@@ -63,15 +57,20 @@ export default function HeroSection() {
           </div>
           <div className="mt-10 flex flex-wrap gap-3 text-sm text-slate-400">
             {['AI automation', 'Real-time sync', 'Frictionless collaboration'].map((item) => (
-              <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-2">{item}</span>
+              <span key={item} className="rounded-full border border-white/10 bg-soft-dark-gray px-3 py-2">{item}</span>
             ))}
           </div>
         </motion.div>
 
-        <motion.div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} animate={{ rotateX: tilt.x, rotateY: tilt.y, scale: 1 }} transition={{ type: 'spring', stiffness: 120, damping: 16 }} className="relative z-10 [perspective:1200px]">
-          <GlassPanel hover className="border-cyan-400/20 bg-slate-950/70 p-4 sm:p-6">
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-900/80 p-4 shadow-[0_0_80px_rgba(34,211,238,0.2)]">
-              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+        <motion.div
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{ rotateX, rotateY }}
+          className="relative z-10 [perspective:1200px] [transform-style:preserve-3d]"
+        >
+          <GlassPanel hover className="border-cyan-400/20 p-4 sm:p-6">
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-soft-dark-gray p-4 shadow-[0_0_80px_rgba(34,211,238,0.15)]">
+              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-dark-charcoal px-4 py-3">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-slate-400">FlowOS Workspace</p>
                   <p className="mt-1 text-xl font-semibold text-white">Momentum Console</p>
@@ -81,14 +80,14 @@ export default function HeroSection() {
               <div className="mt-4 grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
                 <div className="space-y-4">
                   {cards.map((card) => (
-                    <div key={card.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div key={card.label} className="rounded-2xl border border-white/10 bg-dark-charcoal p-4">
                       <p className="text-sm uppercase tracking-[0.3em] text-slate-400">{card.label}</p>
                       <p className="mt-2 text-2xl font-semibold text-white">{card.value}</p>
                     </div>
                   ))}
                 </div>
                 <div className="rounded-[1.5rem] border border-cyan-400/20 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-4">
-                  <div className="rounded-[1.25rem] border border-white/10 bg-slate-950/70 p-4">
+                  <div className="rounded-[1.25rem] border border-white/10 bg-almost-black p-4">
                     <div className="mb-4 flex items-center justify-between">
                       <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Automation health</p>
                       <span className="text-sm text-cyan-300">99.2%</span>
@@ -98,7 +97,7 @@ export default function HeroSection() {
                         <div key={height} className="flex-1 rounded-t-2xl bg-gradient-to-t from-cyan-500 to-blue-500" style={{ height: `${height}px` }} />
                       ))}
                     </div>
-                    <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
+                    <div className="mt-4 rounded-2xl border border-white/10 bg-soft-dark-gray p-3 text-sm text-slate-300">
                       AI agent preparing launch handoff…
                     </div>
                   </div>
@@ -106,11 +105,11 @@ export default function HeroSection() {
               </div>
             </div>
           </GlassPanel>
-          <div className="absolute -left-4 bottom-8 hidden w-40 rounded-2xl border border-cyan-400/20 bg-slate-900/80 p-4 shadow-2xl lg:block">
+          <div className="absolute -left-4 bottom-8 hidden w-40 rounded-2xl border border-cyan-400/20 bg-soft-dark-gray p-4 shadow-2xl lg:block">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Workflow</p>
             <p className="mt-2 text-lg font-semibold text-white">Ready to run</p>
           </div>
-          <div className="absolute -right-2 top-8 hidden w-36 rounded-2xl border border-white/10 bg-white/10 p-4 shadow-2xl lg:block">
+          <div className="absolute -right-2 top-8 hidden w-36 rounded-2xl border border-white/10 bg-soft-dark-gray p-4 shadow-2xl lg:block">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Sync</p>
             <p className="mt-2 text-lg font-semibold text-white">24/7</p>
           </div>

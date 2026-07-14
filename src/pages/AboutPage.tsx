@@ -12,7 +12,7 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-      <section className="rounded-[2.5rem] border border-white/10 bg-slate-950/60 p-10 lg:p-16">
+      <section className="rounded-[2.5rem] border border-white/10 bg-almost-black p-10 lg:p-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">About FlowOS</p>
@@ -26,7 +26,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-6 space-y-3 text-slate-300">
               {['Future-forward product design', 'Human-centered interaction', 'Operational elegance'].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-4">{item}</div>
+                <div key={item} className="rounded-2xl border border-white/10 bg-dark-charcoal p-4">{item}</div>
               ))}
             </div>
           </motion.div>
