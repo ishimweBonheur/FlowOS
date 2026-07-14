@@ -1,9 +1,6 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { PlayCircle } from 'lucide-react'
 import { useState } from 'react'
-import BackgroundGlow from '../animations/BackgroundGlow'
-import GridBackground from '../animations/GridBackground'
-import ParticleField from '../animations/ParticleField'
 import GlowButton from '../ui/GlowButton'
 import GlassPanel from '../ui/GlassPanel'
 
@@ -37,9 +34,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-      <BackgroundGlow />
-      <GridBackground />
-      <ParticleField />
       <div className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="relative z-10">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-200">

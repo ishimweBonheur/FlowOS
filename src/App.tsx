@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Lenis from '@studio-freight/lenis'
+import PageBackground from './components/animations/PageBackground'
 import NavBar from './components/layout/NavBar'
 import Footer from './components/layout/Footer'
 import HomePage from './pages/HomePage'
@@ -17,7 +18,7 @@ function AppShell() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoading(false), 1100)
+    const timer = window.setTimeout(() => setLoading(false), 900)
     return () => window.clearTimeout(timer)
   }, [])
 
@@ -29,12 +30,13 @@ function AppShell() {
       touchMultiplier: 2,
     })
 
+    let frame = 0
     function raf(time: number) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      frame = requestAnimationFrame(raf)
     }
 
-    const frame = requestAnimationFrame(raf)
+    frame = requestAnimationFrame(raf)
     return () => {
       cancelAnimationFrame(frame)
       lenis.destroy()
@@ -42,15 +44,16 @@ function AppShell() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#020617_45%,_#06111f_100%)] text-slate-100">
-      <AnimatePresence mode="wait">
+    <div className="relative min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#020617_45%,_#06111f_100%)] text-slate-100">
+      <PageBackground />
+      <AnimatePresence>
         {loading ? (
           <motion.div
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.04 }}
-            transition={{ duration: 0.6 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#020617]"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center bg-[#020617]"
           >
             <div className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-4 shadow-[0_0_80px_rgba(59,130,246,0.2)] backdrop-blur-xl">
               <div className="h-3 w-3 animate-pulse rounded-full bg-cyan-400" />
@@ -62,29 +65,24 @@ function AppShell() {
         ) : null}
       </AnimatePresence>
 
-      {!loading ? (
-        <>
-          <NavBar />
-          <motion.main
-            key={location.pathname}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -18 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-          >
-            <Routes location={location}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/features" element={<FeaturesPage />} />
-              <Route path="/solutions" element={<SolutionsPage />} />
-              <Route path="/pricing" element={<PricingPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-            </Routes>
-          </motion.main>
-          <Footer />
-        </>
-      ) : null}
+      <NavBar />
+      <motion.main
+        key={location.pathname}
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </motion.main>
+      <Footer />
     </div>
   )
 }

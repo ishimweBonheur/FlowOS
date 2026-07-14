@@ -81,3 +81,30 @@ body {
     transform: translate3d(0, -10px, 0);
   }
 }
+
+@keyframes grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(72px, 72px, 0);
+  }
+}
+
+.animate-grid-drift {
+  animation: grid-drift 28s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
