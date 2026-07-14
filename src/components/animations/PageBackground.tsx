@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
-import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
 import BackgroundGlow from './BackgroundGlow'
+import FloatingGeometries from './FloatingGeometries'
 import FloatingSvgIcons from './FloatingSvgIcons'
 import GridBackground from './GridBackground'
 import ParticleField from './ParticleField'
+import GradientMesh from '../global/GradientMesh'
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion'
+import { useEffect, useState } from 'react'
 
 export default function PageBackground() {
   const reducedMotion = usePrefersReducedMotion()
@@ -11,16 +13,8 @@ export default function PageBackground() {
 
   useEffect(() => {
     if (reducedMotion) return
-
-    const idle = window.requestIdleCallback?.(
-      () => setShowDecorations(true),
-      { timeout: 800 },
-    )
-
-    if (idle !== undefined) {
-      return () => window.cancelIdleCallback?.(idle)
-    }
-
+    const idle = window.requestIdleCallback?.(() => setShowDecorations(true), { timeout: 800 })
+    if (idle !== undefined) return () => window.cancelIdleCallback?.(idle)
     const timer = window.setTimeout(() => setShowDecorations(true), 300)
     return () => window.clearTimeout(timer)
   }, [reducedMotion])
@@ -29,10 +23,12 @@ export default function PageBackground() {
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <GradientMesh />
       <BackgroundGlow />
       <GridBackground />
       {showDecorations ? (
         <>
+          <FloatingGeometries />
           <FloatingSvgIcons />
           <ParticleField />
         </>
